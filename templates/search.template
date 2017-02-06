@@ -1,0 +1,6 @@
+<li>
+	<a href="#/user/<%= item.login %>/<%= id %>/">
+		<img src="<%= item.avatar_url %>" class="c-result--list__avatar" alt="<%= item.login %>" />
+		<span class="c-result--list__user"><%= item.login %></span>
+	</a>
+</li>

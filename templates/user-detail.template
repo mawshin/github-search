@@ -1,0 +1,28 @@
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<a href="#/" class="back">Back</a>
+			</div>
+
+			<div class="col-xs-12">
+				<div class="c-user--details">
+					<h2><%= item.login %></h2>
+
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-sm-4">
+								<img src="<%= item.avatar_url %>" class="c-result--list__avatar-large" alt="<%= item.login %>" />
+							</div>
+							<div class="col-sm-8">
+								<div class="c-user--details__followers"></div>
+								<div class="c-user--details__following"></div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

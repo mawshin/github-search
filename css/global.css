@@ -1,0 +1,65 @@
+#app {
+	margin-top: 20px;
+}
+
+#search-form {
+	width: 600px; 
+	margin: 2em auto 0; 
+	text-align: center;
+}
+
+.c-search {
+	border-bottom: 1px solid #dedede; 
+	padding-bottom: 2rem;
+}
+
+.c-result--list {
+	list-style: none;
+	padding-left: 0;
+}
+
+.c-result--list li {
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+.c-result--list li:nth-child(even) { 
+	background-color: #efefef; 
+}
+
+.c-result--list a {
+	text-decoration: none;
+} 
+
+.c-result--list__avatar {
+	width: 60px;
+	height: 60px;
+	border-radius: 100%;
+}
+
+.c-result--list__avatar-large {
+	width: 120px;
+	height: 120px;
+	border-radius: 100%;
+}
+
+.c-result--list__user {
+	font-size: 20px;
+	margin-left: 15px;
+}
+
+.c-user--details__name {
+	margin-top: 15px;
+}
+
+.c-user--details__following {
+	display: inline-block;
+	font-weight: bold;
+	margin: 0 10px; 
+}
+
+.c-user--details__followers {
+	display: inline-block;
+	font-weight: bold;
+	margin: 0 10px;
+}
