@@ -1,50 +1,5 @@
-(function ($) {
-    var oddle = window.oddle || {};
-    
-    oddle.searchAutocomplete = function () {
-        var searchPara = $('#search-field').val(),
-            resultReturned = 5,
-            apiCall = "https://api.viki.io/v4/search.json?c=" + searchPara + "&per_page=" + resultReturned + "&with_people=true&app=100266a&t=1440586215";
-
-        if (searchPara == '') {
-            $('#search-result-list').empty().hide();
-
-        } else {
-            $.getJSON(apiCall, function(data){
-                //console.log(data.length);
-
-                if (data == '') {
-                    $('#search-result-list').empty().show();
-                    $('#search-result-list').append('<li><strong>No Result found.</strong></li>');
-                } else if (data !== '') {
-                    var i;
-                    $('#search-result-list').empty().show();
-                    for (i = 0; i < resultReturned; i++){    
-                        var template = '<li>' +
-                            '<a class="clearfix" href="https://www.viki.com/' + data[i].u.w + '">' +
-                            '<div class="thumbnail"><img src="' + data[i].i + '"></div>' +
-                            '<div class="search-title">' + data[i].tt + '</div>' +
-                            '</a></li>';
-
-                        $('#search-result-list').append(template);
-                    }
-
-                    if (data.length > resultReturned - 1) {
-                        $('#search-result-list').append('<li><a href="https://www.viki.com/search?q=' + searchPara + '">View all results</a></li>');
-                    }
-                }
-
-            }).done(function() {
-                // Second level success
-            }).fail(function() {
-                // If ajax fail                            
-                console.log( "error" );
-            });
-        }
-    };
-    
+(function ($) {    
     $(function() {
-        // $('#search-field').keyup(oddle.searchAutocomplete);
         var searchFieldValue = $('#jsSearch').val(),
             api = "https://api.github.com/search/users?q=" + searchFieldValue;
 
@@ -65,17 +20,6 @@
                 context.$element().empty();
 
                 $('#jsSearch').val("");
-
-                // $.each(this.items, function(i, item) {
-                //   context.render('templates/search.template', {id: i, item: item})
-                //         .appendTo(context.$element());
-                // });
-                // return false;
-
-                // var str=location.href.toLowerCase();
-                // context.app.swap('');
-                // context.render('templates/about.template', {})
-                //      .appendTo(context.$element());
             });
 
             this.get('#/result/', function(context) { 
@@ -144,8 +88,6 @@
 
             this.before('.*', function() {
                 var hash = document.location.hash;
-                // $("nav").find("a").removeClass("current");
-                // $("nav").find("a[href='"+hash+"']").addClass("current");
             });
 
         });
