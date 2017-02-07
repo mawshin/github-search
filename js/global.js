@@ -10,15 +10,18 @@
                 context.$element().empty();
 
                 $('#jsSearch').val("");
+                $('#search-form').show();
             });
 
             this.get('#/result/', function(context) { 
                 $('#jsSearch').val("");
+                $('#search-form').hide();
 
                 context.app.swap('');
                 
                 var template = '<div class="container">' +
                                 '<div class="row">' +
+                                '<div class="col-xs-12"><a href="#/" class="back">Back</a></div>' +
                                 '<div class="col-xs-12">' +
                                 '<ul class="c-result--list"></ul>' +
                                 '</div></div></div>';
@@ -35,6 +38,7 @@
 
             this.get('#/user/:name/:id/', function(context) {
                 $('#jsSearch').val("");
+                $('#search-form').show();
                 
                 this.item = this.items.items[this.params['id']];
                 if (!this.item) { return this.notFound(); }
@@ -87,6 +91,10 @@
         app.run('#/');
 
         $(".jsSearchBtn").click(function(){
+            if(document.location.hash !== "#/") {
+                app.run('#/');
+            }
+            
             api = "https://api.github.com/search/users?q=" + String($('#jsSearch').val());
 
             app.around(function(callback) {
@@ -98,7 +106,7 @@
                     })
                     .then(callback);
             });
-
+            
             window.location = '#/result/';
         });
     });
