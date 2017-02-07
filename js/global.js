@@ -1,20 +1,10 @@
 (function ($) {    
-    $(function() {
-        var searchFieldValue = $('#jsSearch').val(),
-            api = "https://api.github.com/search/users?q=" + searchFieldValue;
 
+    $(function() {
+        var api = "";
+        
         var app = $.sammy('#app', function() {
             this.use('Template');
-
-            this.around(function(callback) {
-                var context = this;
-                
-                this.load(api)
-                    .then(function(items) {
-                        context.items = $.parseJSON(items);
-                    })
-                    .then(callback);
-            });
 
             this.get('#/', function(context) {
                 context.$element().empty();
@@ -24,7 +14,9 @@
 
             this.get('#/result/', function(context) { 
                 $('#jsSearch').val("");
+
                 context.app.swap('');
+                
                 var template = '<div class="container">' +
                                 '<div class="row">' +
                                 '<div class="col-xs-12">' +
@@ -92,12 +84,22 @@
 
         });
 
-        $(function() {
-            app.run('#/');
+        app.run('#/');
 
-            $(".jsSearchBtn").click(function(){
-                window.location = '#/result/';
+        $(".jsSearchBtn").click(function(){
+            api = "https://api.github.com/search/users?q=" + String($('#jsSearch').val());
+
+            app.around(function(callback) {
+                var context = this;
+                
+                this.load(api)
+                    .then(function(items) {
+                        context.items = $.parseJSON(items);
+                    })
+                    .then(callback);
             });
+
+            window.location = '#/result/';
         });
     });
 })(jQuery);
