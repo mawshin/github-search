@@ -90,11 +90,7 @@
 
         app.run('#/');
 
-        $(".jsSearchBtn").click(function(){
-            if(document.location.hash !== "#/") {
-                app.run('#/');
-            }
-            
+        function apiCall() {
             api = "https://api.github.com/search/users?q=" + String($('#jsSearch').val());
 
             app.around(function(callback) {
@@ -106,7 +102,23 @@
                     })
                     .then(callback);
             });
+        };
+
+        $(".jsSearchBtn").click(function(){
+            if(document.location.hash !== "#/") {
+                app.run('#/');
+            }
             
+            apiCall();
+            
+            window.location = '#/result/';
+        });
+
+        $('#search-form').on("submit", function(e) {
+            e.preventDefault();
+
+            apiCall();
+
             window.location = '#/result/';
         });
     });
